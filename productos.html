@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            
+        }
+        header {
+            background-color: #350032;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: gray;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 20px;
+        }
+        footer {
+            background-color: #350032;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .products {
+            flex-grow: 2;
+            padding: 20px;
+        }
+        .cart {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .product img {
+            max-width: 100px;
+            margin-right: 10px;
+        }
+        .cart-item {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .total {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: right;
+        }
+       
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Productos</h1>
+    </header>
+       
+    <nav>
+    
+        <a href="index.html">Inicio</a>
+        <a href="ofertas.html">Ofertas</a>
+        <a href="contacto.html">Contacto</a>
+            
+        </nav>
+            
+</nav>
+    <div class="container">
+        <div class="products">
+            <div class="product">
+                <img src="imgs/cocalata.jpg" alt="Producto 1">
+                <div>
+                    <h3>Coca cola de lata</h3>
+                    <p>Precio: $10.00</p>
+                    <button onclick="addToCart('Producto 1', 10.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="imgs/coca2.5l.jpg" alt="Producto 2">
+                <div>
+                    <h3>Coca cola 2.5L</h3>
+                    <p>Precio: $35.00</p>
+                    <button onclick="addToCart('Producto 2', 35.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="imgs/spritelata.jpg" alt="Producto 3 ">
+                <div>
+                    <h3>Sprite lata</h3>
+                    <p>Precio: $17.00</p>
+                    <button onclick="addToCart('Producto 3', 17.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="imgs/Spriite2.5L.jpg" alt="Producto 4">
+                <div>
+                    <h3>Sprite 2.5L</h3>
+                    <p>Precio: $40.00</p>
+                    <button onclick="addToCart('Producto 3', 40.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="imgs/fanta.jpg" alt="Producto 5 ">
+                <div>
+                    <h3>Fanta de lata</h3>
+                    <p>Precio: $23.00</p>
+                    <button onclick="addToCart('Producto 3', 23.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="imgs/fanta3L.jpg" alt="Producto 7">
+                <div>
+                    <h3>Fanta 3L</h3>
+                    <p>Precio: $50.00</p>
+                    <button onclick="addToCart('Producto 3', 50.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="imgs/7uplata.jpg" alt="Producto 8">
+                <div>
+                    <h3>7up lata</h3>
+                    <p>Precio: $20.00</p>
+                    <button onclick="addToCart('Producto 3', 20.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="imgs/7up2.45L.jpg" alt="Producto 9">
+                <div>
+                    <h3>7up 2.45L</h3>
+                    <p>Precio: $44.00</p>
+                    <button onclick="addToCart('Producto 3', 44.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="imgs/paquete.jpg" alt="Producto 10">
+                <div>
+                    <h3>Paquete de refrescos de lata</h3>
+                    <p>Precio: $120.00</p>
+                    <button onclick="addToCart('Producto 3', 120.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+         <br><br>
+           
+        </div>
+        <div class="cart">
+            <h2>Carrito de Compras</h2>
+            <div id="cart-items">
+               
+            </div>
+            <div class="total" id="total-price">Total: $x.xx</div>
+        </div>
+    </div>
+    <script>
+      
+        function addToCart(productName, productPrice) {
+            const cartItems = document.getElementById('cart-items');
+            const newItem = document.createElement('div');
+            newItem.classList.add('cart-item');
+            newItem.innerHTML = `
+                <span>${productName}</span>
+                <span>${productPrice.toFixed(2)}</span>
+                <button onclick="removeFromCart(this)">Eliminar</button>
+            `;
+            cartItems.appendChild(newItem);
+            updateTotal(productPrice);
+        }
+
+      
+        function removeFromCart(button) {
+            const item = button.parentElement;
+            const price = parseFloat(item.children[1].textContent.slice(7));
+            item.remove();
+            updateTotal(-price);
+        }
+       
+        function updateTotal(price) {
+            const totalElement = document.getElementById('total-price');
+            const currentTotal = parseFloat(totalElement.textContent.slice(7));
+            const newTotal = price * total-price;
+            totalElement.textContent = `Total: $${newTotal.toFixed(2)}`;
+         
+        }
+    </script>
+    <footer>
+        <p>&copy; 2024 Refrescos ToTo. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
